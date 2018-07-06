@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="sql," />
 
 
 
@@ -79,16 +79,22 @@
 
 
 
-<meta name="description" content="恭喜达拉斯独行侠队获得2020年NBA总冠军">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MAVS">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入 常用函数 user()：返回数据库的用户名 database()：返回当前用的数据库名 version()：返回数据库版本 union()：连接多个select结果，要求每个语句有相等的列，列类型、顺序相等 concat_ws()：将一行结果中的多列连接起来，第一个参数为连接分割符，后面参数为要查询的东西 group_conca">
+<meta name="keywords" content="sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入基础">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/sql注入基础/index.html">
 <meta property="og:site_name" content="MAVS">
-<meta property="og:description" content="恭喜达拉斯独行侠队获得2020年NBA总冠军">
+<meta property="og:description" content="原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入 常用函数 user()：返回数据库的用户名 database()：返回当前用的数据库名 version()：返回数据库版本 union()：连接多个select结果，要求每个语句有相等的列，列类型、顺序相等 concat_ws()：将一行结果中的多列连接起来，第一个参数为连接分割符，后面参数为要查询的东西 group_conca">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/Oo1bHBA.png">
+<meta property="og:image" content="https://i.imgur.com/5QwxXg7.png">
+<meta property="og:image" content="https://i.imgur.com/MtbNVPP.png">
+<meta property="og:updated_time" content="2018-07-06T08:26:13.579Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MAVS">
-<meta name="twitter:description" content="恭喜达拉斯独行侠队获得2020年NBA总冠军">
+<meta name="twitter:title" content="sql注入基础">
+<meta name="twitter:description" content="原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入 常用函数 user()：返回数据库的用户名 database()：返回当前用的数据库名 version()：返回数据库版本 union()：连接多个select结果，要求每个语句有相等的列，列类型、顺序相等 concat_ws()：将一行结果中的多列连接起来，第一个参数为连接分割符，后面参数为要查询的东西 group_conca">
+<meta name="twitter:image" content="https://i.imgur.com/Oo1bHBA.png">
 
 
 
@@ -118,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/06/sql注入基础/"/>
 
 
 
 
 
-  <title>MAVS</title>
+  <title>sql注入基础 | MAVS</title>
   
 
 
@@ -143,8 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,9 +222,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,9 +254,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/06/sql注入基础/" itemprop="url">sql注入基础</a></h1>
+          <h1 class="post-title" itemprop="name headline">sql注入基础</h1>
         
 
         <div class="post-meta">
@@ -301,9 +304,7 @@
       
 
       
-        
-          
-            <p>原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入</p>
+        <p>原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入</p>
 <h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><ul>
 <li>user()：返回数据库的用户名</li>
 <li>database()：返回当前用的数据库名</li>
@@ -368,8 +369,6 @@
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这是最简单的注入过程，也可用sqlmap代替</p>
 <p>注入的难点在于找到注入点，和绕过对关键字的过滤</p>
 
-          
-        
       
     </div>
     
@@ -384,314 +383,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="忖度">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MAVS">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/05/ubuntu18-04配置php5.6环境/" itemprop="url">ubuntu18.04配置php5.6环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T17:28:52+08:00">
-                2018-07-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/sql/" rel="tag"># sql</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><hr>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install apache2</code></p>
-<h2 id="服务使用"><a href="#服务使用" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
-<li>开启 <code>sudo /etc/init.d/apache2 restar</code></li>
-<li>停止 <code>sudo /etc/init.d/apache2 stop</code></li>
-<li>重启 <code>sudo /etc/init.d/apache2 restar</code></li>
-</ul>
-<p>推荐用下面这种方法，记起来简单，通用</p>
-<ul>
-<li>开启 <code>sudo service apache2 start</code></li>
-<li>停止 <code>sudo service apache2 stop</code></li>
-<li>重启 <code>sudo service apache2 restart</code></li>
-<li>查看状态 <code>sudo service apache2 status</code></li>
-</ul>
-<p>开启服务后，打开浏览器，进入<code>localhost</code>或<code>127.0.0.1</code>查看是否成功</p>
-<h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><hr>
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>此处用的是php5.6</p>
-<ol>
-<li>sudo aptitude purge `dpkg -l | grep php| awk ‘{print $2}’ |tr “\n” “ “`</li>
-<li><code>sudo add-apt-repository ppa:ondrej/php</code></li>
-<li><code>sudo apt-get update</code></li>
-<li><code>sudo apt-get install php5.6</code></li>
-</ol>
-<p>安装后输入<code>php -v</code>查看是否完成</p>
-<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><hr>
-<h2 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install mysql-server mysql-client</code></p>
-<p>安装的时候竟然没有提示输入root密码，如果成功设置密码的可忽略修改密码步骤</p>
-<p>先说一下服务的使用，再说修改密码</p>
-<h2 id="服务使用-1"><a href="#服务使用-1" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
-<li>开启 <code>sudo service mysql start</code></li>
-<li>停止 <code>sudo service mysql stop</code></li>
-<li>重启 <code>sudo service mysql restart</code></li>
-</ul>
-<p>可参考apache，ubuntu的服务命令套路</p>
-<h2 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h2><p>进入mysql默认的用户</p>
-<p><code>sudo vim /etc/mysql/debian.cnf</code></p>
-<p>找到这句话：password = Gt0MWsNmNv3gOW9P    复制该密码<br><code>mysql -u debian-sys-maint -p</code></p>
-<p>然后粘贴输入该密码，进入mysql</p>
-<ol>
-<li><code>use mysql;</code></li>
-<li><code>update user set authentication_string=PASSWORD(&quot;自定义密码&quot;) where user=&#39;root&#39;;</code></li>
-<li><code>update user set plugin=&quot;mysql_native_password&quot;;</code></li>
-<li><code>flush privileges;</code></li>
-<li><code>quit</code></li>
-</ol>
-<p>重启服务即可</p>
-<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><hr>
-<p>将php和apache连接起来</p>
-<p><code>sudo apt-get install libapache2-mod-php5.6</code></p>
-<p>对php扩展mysql</p>
-<p><code>sudo apt-get install php5.6-mysql</code></p>
-<p>php还有很多别的扩展，输入<code>sudo apt-get install php5.6-</code> 再按两下tab键，即可看到</p>
-<h1 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h1><hr>
-<p>为了方便使用，更改apache的根目录（写的项目放于此处）</p>
-<p>在桌面新建web文件夹</p>
-<p><code>sudo ln -s /home/nik/Desktop/web /var/www/html</code></p>
-<p>此时在web目录中创建cwd.php，添加如下</p>
-<pre><code>&lt;?php  
-    echo &quot;MFFL&quot;;
-?&gt; 
-</code></pre><p>在浏览器输入<code>localhost/web/cwd.php</code>，检查成功</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="忖度">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MAVS">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/29/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-29T23:02:43+08:00">
-                2018-06-29
-              </time>
+              <a href="/2018/07/05/ubuntu18-04配置php5.6环境/" rel="next" title="ubuntu18.04配置php5.6环境">
+                <i class="fa fa-chevron-left"></i> ubuntu18.04配置php5.6环境
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>努力，奋斗</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -701,10 +422,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -712,6 +434,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -732,8 +458,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -784,6 +519,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用函数"><span class="nav-number">1.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql通用数据库"><span class="nav-number">2.</span> <span class="nav-text">mysql通用数据库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体实例"><span class="nav-number">3.</span> <span class="nav-text">具体实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -917,6 +668,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
