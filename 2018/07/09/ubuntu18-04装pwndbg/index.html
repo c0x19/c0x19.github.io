@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="pwndbg," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+<meta name="description" content="以前用的是peda插件，今天换成pwndgb，功能更多，而且界面更好看 参考 https://github.com/pwndbg/pwndbg  安装 按照网站的教程装就好了：  git clone https://github.com/pwndbg/pwndbg cd pwndbg sudo ./setup.sh  第三步对比官网加了sudo，因为发现最后有权限问题 禁用peda 参考peda的">
+<meta name="keywords" content="pwndbg">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu18.04配置php5.6环境">
-<meta property="og:url" content="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/index.html">
+<meta property="og:title" content="ubuntu18.04装pwndbg">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/ubuntu18-04装pwndbg/index.html">
 <meta property="og:site_name" content="MAVS">
-<meta property="og:description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+<meta property="og:description" content="以前用的是peda插件，今天换成pwndgb，功能更多，而且界面更好看 参考 https://github.com/pwndbg/pwndbg  安装 按照网站的教程装就好了：  git clone https://github.com/pwndbg/pwndbg cd pwndbg sudo ./setup.sh  第三步对比官网加了sudo，因为发现最后有权限问题 禁用peda 参考peda的">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-05T12:26:19.916Z">
+<meta property="og:updated_time" content="2018-07-09T12:32:19.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu18.04配置php5.6环境">
-<meta name="twitter:description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+<meta name="twitter:title" content="ubuntu18.04装pwndbg">
+<meta name="twitter:description" content="以前用的是peda插件，今天换成pwndgb，功能更多，而且界面更好看 参考 https://github.com/pwndbg/pwndbg  安装 按照网站的教程装就好了：  git clone https://github.com/pwndbg/pwndbg cd pwndbg sudo ./setup.sh  第三步对比官网加了sudo，因为发现最后有权限问题 禁用peda 参考peda的">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/09/ubuntu18-04装pwndbg/"/>
 
 
 
 
 
-  <title>ubuntu18.04配置php5.6环境 | MAVS</title>
+  <title>ubuntu18.04装pwndbg | MAVS</title>
   
 
 
@@ -232,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/ubuntu18-04装pwndbg/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="忖度">
@@ -249,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ubuntu18.04配置php5.6环境</h1>
+          <h1 class="post-title" itemprop="name headline">ubuntu18.04装pwndbg</h1>
         
 
         <div class="post-meta">
@@ -261,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T17:28:52+08:00">
-                2018-07-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T16:33:17+08:00">
+                2018-07-09
               </time>
             
 
@@ -299,67 +300,42 @@
       
 
       
-        <h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><hr>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install apache2</code></p>
-<h2 id="服务使用"><a href="#服务使用" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
-<li>开启 <code>sudo /etc/init.d/apache2 restar</code></li>
-<li>停止 <code>sudo /etc/init.d/apache2 stop</code></li>
-<li>重启 <code>sudo /etc/init.d/apache2 restar</code></li>
-</ul>
-<p>推荐用下面这种方法，记起来简单，通用</p>
+        <p>以前用的是peda插件，今天换成pwndgb，功能更多，而且界面更好看</p>
+<p>参考 <a href="https://github.com/pwndbg/pwndbg" target="_blank" rel="noopener">https://github.com/pwndbg/pwndbg</a> </p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><hr>
+<p><strong>按照网站的教程装就好了：</strong></p>
+<ol>
+<li><code>git clone https://github.com/pwndbg/pwndbg</code></li>
+<li><code>cd pwndbg</code></li>
+<li><code>sudo ./setup.sh</code></li>
+</ol>
+<p>第三步对比官网加了sudo，因为发现最后有权限问题</p>
+<p><strong>禁用peda</strong></p>
+<p>参考peda的安装步骤：</p>
+<ol>
+<li><code>git clone https://github.com/longld/peda.git ~/peda</code></li>
+<li><code>echo &quot;source ~/peda/peda.py&quot; &gt;&gt; ~/.gdbinit</code></li>
+</ol>
+<p>第二步在~/.gdbinit中加了开启peda脚本</p>
+<p>可以打开pwndbg的setup.sh，在最后面发现也是在~/.gdbinit中加了开启pwndbg脚本，</p>
+<p>即：<code>echo &quot;source $PWD/gdbinit.py&quot; &gt;&gt; ~/.gdbinit</code></p>
+<p>所以打开~/.gdbinit删除peda那句话就好了</p>
+<p>同理，<strong>peda和pwndbg的切换</strong>就是在~/.gdbinit中切换语句</p>
+<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><hr>
+<p><strong>界面</strong></p>
+<p>从上到下为寄存器、代码、栈、函数回溯关系</p>
+<p>界面更加美观</p>
 <ul>
-<li>开启 <code>sudo service apache2 start</code></li>
-<li>停止 <code>sudo service apache2 stop</code></li>
-<li>重启 <code>sudo service apache2 restart</code></li>
-<li>查看状态 <code>sudo service apache2 status</code></li>
+<li>调用函数时，会显示函数的参数</li>
+<li>条件跳转语句的前面，会显示对号或叉号来表示是否跳转</li>
+<li>栈中会标出esp和ebp</li>
 </ul>
-<p>开启服务后，打开浏览器，进入<code>localhost</code>或<code>127.0.0.1</code>查看是否成功</p>
-<h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><hr>
-<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>此处用的是php5.6</p>
-<ol>
-<li>sudo aptitude purge `dpkg -l | grep php| awk ‘{print $2}’ |tr “\n” “ “`</li>
-<li><code>sudo add-apt-repository ppa:ondrej/php</code></li>
-<li><code>sudo apt-get update</code></li>
-<li><code>sudo apt-get install php5.6</code></li>
-</ol>
-<p>安装后输入<code>php -v</code>查看是否完成</p>
-<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><hr>
-<h2 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install mysql-server mysql-client</code></p>
-<p>安装的时候竟然没有提示输入root密码，如果成功设置密码的可忽略修改密码步骤</p>
-<p>先说一下服务的使用，再说修改密码</p>
-<h2 id="服务使用-1"><a href="#服务使用-1" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
-<li>开启 <code>sudo service mysql start</code></li>
-<li>停止 <code>sudo service mysql stop</code></li>
-<li>重启 <code>sudo service mysql restart</code></li>
+<p><strong>命令</strong></p>
+<ul>
+<li>stack：查看栈，后面可加数字来规定查看的大小，如<code>stack</code>或<code>stack 20</code></li>
+<li>vmmap：虚拟地址映射，可查看libc等基址</li>
+<li>telescope：查看内存，<code>telescope $rsp 20</code>等价于<code>stack 20</code></li>
 </ul>
-<p>可参考apache，ubuntu的服务命令套路</p>
-<h2 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h2><p>进入mysql默认的用户</p>
-<p><code>sudo vim /etc/mysql/debian.cnf</code></p>
-<p>找到这句话：password = Gt0MWsNmNv3gOW9P    复制该密码<br><code>mysql -u debian-sys-maint -p</code></p>
-<p>然后粘贴输入该密码，进入mysql</p>
-<ol>
-<li><code>use mysql;</code></li>
-<li><code>update user set authentication_string=PASSWORD(&quot;自定义密码&quot;) where user=&#39;root&#39;;</code></li>
-<li><code>update user set plugin=&quot;mysql_native_password&quot;;</code></li>
-<li><code>flush privileges;</code></li>
-<li><code>quit</code></li>
-</ol>
-<p>重启服务即可</p>
-<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><hr>
-<p>将php和apache连接起来</p>
-<p><code>sudo apt-get install libapache2-mod-php5.6</code></p>
-<p>对php扩展mysql</p>
-<p><code>sudo apt-get install php5.6-mysql</code></p>
-<p>php还有很多别的扩展，输入<code>sudo apt-get install php5.6-</code> 再按两下tab键，即可看到</p>
-<h1 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h1><hr>
-<p>为了方便使用，更改apache的根目录（写的项目放于此处）</p>
-<p>在桌面新建web文件夹</p>
-<p><code>sudo ln -s /home/nik/Desktop/web /var/www/html</code></p>
-<p>此时在web目录中创建cwd.php，添加如下</p>
-<pre><code>&lt;?php  
-    echo &quot;MFFL&quot;;
-?&gt; 
-</code></pre><p>在浏览器输入<code>localhost/web/cwd.php</code>，检查成功</p>
 
       
     </div>
@@ -375,6 +351,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/pwndbg/" rel="tag"># pwndbg</a>
+          
+        </div>
+      
 
       
       
@@ -384,8 +366,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/29/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/07/06/简单sql注入过程/" rel="next" title="简单sql注入过程">
+                <i class="fa fa-chevron-left"></i> 简单sql注入过程
               </a>
             
           </div>
@@ -393,10 +375,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/06/简单sql注入过程/" rel="prev" title="简单sql注入过程">
-                简单sql注入过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,7 +497,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apache"><span class="nav-number">1.</span> <span class="nav-text">apache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务使用"><span class="nav-number">1.2.</span> <span class="nav-text">服务使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php"><span class="nav-number">2.</span> <span class="nav-text">php</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-2"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务使用-1"><span class="nav-number">3.2.</span> <span class="nav-text">服务使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改root密码"><span class="nav-number">3.3.</span> <span class="nav-text">修改root密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接"><span class="nav-number">4.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装完成"><span class="nav-number">5.</span> <span class="nav-text">安装完成</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单使用"><span class="nav-number">2.</span> <span class="nav-text">简单使用</span></a></li></ol></div>
             
 
           </div>
