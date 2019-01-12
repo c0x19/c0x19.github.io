@@ -21,7 +21,7 @@ python2中的urllib和urllib2合在一起了，统一成python3中的urllib库�
 - 也可以由自己制定一个request对象来打开
 
 
-### url.request.urlopen() ###
+## url.request.urlopen() ##
 
 - 作用：打开一个url请求， 并得到返回的响应
 
@@ -43,7 +43,7 @@ python2中的urllib和urllib2合在一起了，统一成python3中的urllib库�
 
 虽然可以发送请求，但不可以自己设置请求头部中的数据，urllib.request模块提供了Request()方法来自定义一个request请求对象，然后用上面的urllib.request.urlopen()来发送该request对象
 
-### url.request.Request() ###
+## url.request.Request() ##
 
 - 作用：产生一个request对象，可以用上面的urlopen()来请求这个对象
 
@@ -73,7 +73,7 @@ PS：data参数设置了即为post，没有设置即为get，get传递参数需�
 # error #
 ---
 
-### urllib.error.URLError ###
+## urllib.error.URLError ##
 
 所有异常的基类，所有请求过程中的异常都可以被这个捕获到，通过reason属性来查看异常原因
 
@@ -83,7 +83,7 @@ PS：data参数设置了即为post，没有设置即为get，get传递参数需�
 	except urllib.error.URLError as e:
 		print(e.reason)
 
-### urllib.error.HTTPError ###
+## urllib.error.HTTPError ##
 
 http错误，具体没搞清楚，反正用上面的基类URLError就好了
 
