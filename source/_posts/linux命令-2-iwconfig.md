@@ -1,5 +1,5 @@
 ---
-title: linux命令2iwconfig
+title: linux命令-2-iwconfig
 date: 2019-03-28 13:54:26
 tags:
 ---
