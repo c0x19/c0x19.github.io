@@ -1,5 +1,5 @@
 ---
-title: linux命令-1-ifconfig
+title: linux命令1ifconfig
 date: 2019-03-28 13:30:13
 tags:
 ---
