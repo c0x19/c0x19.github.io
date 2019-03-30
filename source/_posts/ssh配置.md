@@ -7,16 +7,16 @@ tags:
 
 因为要搞ssh渗透，学习和配置一下ssh服务，环境是两个虚拟机，靶机ubuntu18.04，客户端kali
 
-#ssh服务端配置#
+# ssh服务端配置
 ---
 
 在作为服务端的虚拟机ubuntu18.04上配置ssh server
 
-##安装ssh server
+## 安装ssh server
 
 `sudo apt-get install openssh-server`
 
-##查看并开启服务
+## 查看并开启服务
 
 安装完成后，ssh服务默认是开启的，下面是对服务的一些操作
 
@@ -28,7 +28,7 @@ tags:
 
 - 重启：`sudo service ssh restart`
 
-##修改端口号
+## 修改端口号
 
 防止被轻易找到默认端口22，修改端口号
 
