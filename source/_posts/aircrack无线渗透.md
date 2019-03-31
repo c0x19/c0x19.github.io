@@ -19,6 +19,7 @@ aircrack-ng是处理无线的一个工具包，我们使用的是：
 4. 破解
 
 # 配置 #
+---
 
 用的环境是虚拟机kali，外面接了个ALFA网卡
 
@@ -37,13 +38,13 @@ aircrack-ng是处理无线的一个工具包，我们使用的是：
 	然后发现网卡变成了wlan0mon，即监听模式的网卡，此时网卡配置完成
 
 # 探测wifi信息 #
-
+---
 `airodump-ng wlan0mon`
 
 抓包查看信息，在ESSID中找到要破解的wifi名字，记下对应的MAC地址(BSSID)和频道(channel,CH)
 
 # 抓包 #
-
+---
 为了破解wifi，需要抓取对应wifi的握手包
 
 `airodump-ng --bssid 地址 -c 频道 -w 存储文件名 wlan0mon`
@@ -61,6 +62,7 @@ aircrack-ng是处理无线的一个工具包，我们使用的是：
 此时看到抓包界面的右上角出现handshake：地址，即抓包完成了
 
 # 破解 #
+---
 
 对抓到的包用字典进行破解
 
