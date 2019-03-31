@@ -43,7 +43,7 @@ linux： `ifconfig`
 
 - -PU(UDP Ping)：发送UDP报文，可以穿过只对TCP过滤的防火墙
 
-- -PR(ARP Ping)：**默认用的扫描方式**，局域网好用就完事了
+- -PR(ARP Ping)：**默认用的扫描方式**，局域网好用
 
 # 扫描端口 #
 
