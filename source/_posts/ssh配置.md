@@ -28,6 +28,14 @@ tags:
 
 - 重启：`sudo service ssh restart`
 
+## 开启root密码登录
+
+1. `vim /etc/ssh/sshd_config`
+
+2. 找到passwordAuthentication，去掉注释#，将键值改成yes
+
+3. 重启ssh服务 `service ssh restart`
+
 ## 修改端口号
 
 防止被轻易找到默认端口22，修改端口号
