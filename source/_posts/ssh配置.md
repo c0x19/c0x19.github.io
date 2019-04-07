@@ -32,9 +32,11 @@ tags:
 
 1. `vim /etc/ssh/sshd_config`
 
-2. 找到passwordAuthentication，去掉注释#，将键值改成yes
+2. 找到PermitRootLogin，将键值改成yes，并把该行注释符删掉
 
-3. 重启ssh服务 `service ssh restart`
+3. 找到passwordAuthentication，将键值改成yes
+
+4. 重启ssh服务 `service ssh restart`
 
 ## 修改端口号
 
@@ -43,7 +45,7 @@ tags:
 
 1. 打开配置文件 `sudo vim /etc/ssh/sshd_config`
 
-	找到`#port 22`这一行，在这一行下面加一句，即你要修改的端口号，如`port 9625`，保存修改
+	找到`#port 22`这一行，在这一行下面加一句，即你要修改的端口号，如`port 9625`，并将上面port 22的注释删掉（防止失败后无法连接，测试成功再加上注释），保存修改
 
 2. 重启服务 `sudo service ssh restart`
 
