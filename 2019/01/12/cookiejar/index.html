@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="cookiejar是http库的一个模块，其中有4个主要的类，CookieJar，FileCookieJar，MozillaCookieJar，LWPCookieJar  CookieJar()：管理HTTP cookie值，是存储cookie的对象 FileCookieJar(filename, delayload=None, policy=None) : 由CooikeJar派生的，增加了将c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookiejar">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/cookiejar/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="cookiejar是http库的一个模块，其中有4个主要的类，CookieJar，FileCookieJar，MozillaCookieJar，LWPCookieJar  CookieJar()：管理HTTP cookie值，是存储cookie的对象 FileCookieJar(filename, delayload=None, policy=None) : 由CooikeJar派生的，增加了将c">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cookiejar">
+<meta name="twitter:description" content="cookiejar是http库的一个模块，其中有4个主要的类，CookieJar，FileCookieJar，MozillaCookieJar，LWPCookieJar  CookieJar()：管理HTTP cookie值，是存储cookie的对象 FileCookieJar(filename, delayload=None, policy=None) : 由CooikeJar派生的，增加了将c">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/12/cookiejar/"/>
+
+
+
+
+
+  <title>cookiejar | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/cookiejar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cookiejar</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T20:35:06+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>cookiejar是http库的一个模块，其中有4个主要的类，CookieJar，FileCookieJar，MozillaCookieJar，LWPCookieJar</p>
+<ul>
+<li>CookieJar()：管理HTTP cookie值，是存储cookie的对象</li>
+<li>FileCookieJar(filename, delayload=None, policy=None) : 由CooikeJar派生的，增加了将cookie与文件交互的功能</li>
+<li>MozillaCookieJar(filename, delayload=None, policy=None)：由FileCookieJar派生的，创建与Mozilla浏览器 cookies.txt兼容的FileCookieJar实例</li>
+<li>LWPCookieJar(filename, delayload=None, policy=None) : 由FileCookieJar派生的，创建与libwww-per标准的Set-Cookie3文件格式兼容的FileCookieJar实例</li>
+</ul>
+<p>大多情况只用CookieJar(), 如果需要和本地文件交互，就用MozillaCookieJar()或LWPCookieJar()</p>
+<p>根据urllib的学习</p>
+<ol>
+<li>用urllib.request.urlopen()可以请求一个url链接，并可以加上data和tiemout</li>
+<li>但1没法解决设置头部数据，这里就有了urllib.request.Request()，可以自己定义一个request对象，用这个可以设置头部和数据，然后用urllib.request.urlopen()来发送该对象</li>
+</ol>
+<p>如果要设置cookie呢，上面这些都无法完成</p>
+<h1 id="CookieJar"><a href="#CookieJar" class="headerlink" title="CookieJar"></a>CookieJar</h1><hr>
+<p>这里就用到了http库中的cookiejar，设置带cookie请求具体步骤如下</p>
+<ol>
+<li><p>创建一个存储cookie的cookiejar实例</p>
+<p> <code>cookie = http.cookiejar.CookieJar()</code></p>
+</li>
+<li><p>创建对上面cookie实例的处理器</p>
+<p> <code>handler = urllib.request.HTTPCookieProcessor(cookie)</code></p>
+</li>
+<li><p>创建关于该处理器的opener</p>
+<p> <code>opener = urllib.request.build_opener(handler)</code></p>
+</li>
+</ol>
+<p>opener是我们自己制定的一个和cookie关联的opener实例，以前用的urlopen也是一种opener实例，opener和以前的urlopen一样，可以打开url或者request对象，但完成了和cookie的关联</p>
+<pre><code>import urllib.request
+import urllib.error
+import urllib.parse
+import http.cookiejar
+
+url = &apos;http://www.baidu.com&apos;
+req = urllib.request.Request(url)
+cookie = http.cookiejar.CookieJar()
+handler = urllib.request.HTTPCookieProcessor(cookie)
+opener = urllib.request.build_opener(handler)
+try:
+    rep = opener.open(req)
+    print(req.get_method())
+    print(rep.info())
+    for item in cookie:
+        print(&apos;name:&apos; + item.name)
+        print(&apos;value:&apos; + item.value)
+except urllib.error.URLError as e:
+    print(e.reason)
+</code></pre><h1 id="cookie与本地文件交互"><a href="#cookie与本地文件交互" class="headerlink" title="cookie与本地文件交互"></a>cookie与本地文件交互</h1><hr>
+<p>可以用MozillaCookieJar或LWPCookieJar来把获取的cookie保存在文件中</p>
+<h2 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h2><pre><code># 将cookie保存到文件中
+import urllib.request
+import urllib.error
+import urllib.parse
+import http.cookiejar
+
+url = &apos;http://www.baidu.com&apos;
+req = urllib.request.Request(url)
+filename = &apos;cookie.txt&apos;  # 同目录的文件名，需要自己创建好，写入时会覆盖已有的数据
+cookie = http.cookiejar.MozillaCookieJar(filename)
+handler = urllib.request.HTTPCookieProcessor(cookie)
+opener = urllib.request.build_opener(handler)
+try:
+    rep = opener.open(req)
+    print(req.get_method())
+    print(rep.info())
+    for item in cookie:
+        print(&apos;name:&apos; + item.name)
+        print(&apos;value:&apos; + item.value)
+    cookie.save(ignore_discard=True, ignore_expires=True)
+    # discard表示即使cookies将被丢弃也将它保存下来，expires表示覆盖原文件写入
+except urllib.error.URLError as e:
+    print(e.reason)
+</code></pre><h2 id="从文件中读取"><a href="#从文件中读取" class="headerlink" title="从文件中读取"></a>从文件中读取</h2><pre><code># 从文件中读取cookie
+urllib.request
+import urllib.error
+import urllib.parse
+import http.cookiejar
+
+url = &apos;http://www.baidu.com&apos;
+req = urllib.request.Request(url)
+filename = &apos;cookie.txt&apos;
+cookie = http.cookiejar.MozillaCookieJar()
+cookie.load(filename, ignore_discard=True, ignore_expires=True)
+handler = urllib.request.HTTPCookieProcessor(cookie)
+opener = urllib.request.build_opener(handler)
+try:
+    rep = opener.open(req)
+    print(rep.read().decode(&apos;utf-8&apos;))
+except urllib.error.URLError as e:
+    print(e.reason)
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/urllib/" rel="next" title="urllib">
+                <i class="fa fa-chevron-left"></i> urllib
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/13/python正则表达式/" rel="prev" title="python正则表达式">
+                python正则表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CookieJar"><span class="nav-number">1.</span> <span class="nav-text">CookieJar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cookie与本地文件交互"><span class="nav-number">2.</span> <span class="nav-text">cookie与本地文件交互</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#写入文件"><span class="nav-number">2.1.</span> <span class="nav-text">写入文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从文件中读取"><span class="nav-number">2.2.</span> <span class="nav-text">从文件中读取</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

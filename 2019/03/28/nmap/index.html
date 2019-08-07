@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="namp嗅探扫描神器，渗透必备，下面通过渗透过程来介绍nmap常用的用法 发现主机通过扫描整个子网来发现主机，所以要先找到子网的IP段 windows：ipconfig linux： ifconfig 可以查看本机的IP地址、网关的IP地址、子网掩码 通过子网掩码可以知道IP地址前缀，如255.255.255.0即为24，若网关IP为192.168.1.1，则扫描整个子网命令： nmap 192.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nmap">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/nmap/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="namp嗅探扫描神器，渗透必备，下面通过渗透过程来介绍nmap常用的用法 发现主机通过扫描整个子网来发现主机，所以要先找到子网的IP段 windows：ipconfig linux： ifconfig 可以查看本机的IP地址、网关的IP地址、子网掩码 通过子网掩码可以知道IP地址前缀，如255.255.255.0即为24，若网关IP为192.168.1.1，则扫描整个子网命令： nmap 192.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nmap">
+<meta name="twitter:description" content="namp嗅探扫描神器，渗透必备，下面通过渗透过程来介绍nmap常用的用法 发现主机通过扫描整个子网来发现主机，所以要先找到子网的IP段 windows：ipconfig linux： ifconfig 可以查看本机的IP地址、网关的IP地址、子网掩码 通过子网掩码可以知道IP地址前缀，如255.255.255.0即为24，若网关IP为192.168.1.1，则扫描整个子网命令： nmap 192.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/28/nmap/"/>
+
+
+
+
+
+  <title>nmap | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/nmap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nmap</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T23:11:52+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>namp嗅探扫描神器，渗透必备，下面通过渗透过程来介绍nmap常用的用法</p>
+<h1 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h1><p>通过扫描整个子网来发现主机，所以要先找到子网的IP段</p>
+<p>windows：<code>ipconfig</code></p>
+<p>linux： <code>ifconfig</code></p>
+<p>可以查看本机的IP地址、网关的IP地址、子网掩码</p>
+<p>通过子网掩码可以知道IP地址前缀，如255.255.255.0即为24，若网关IP为192.168.1.1，则<strong>扫描整个子网</strong>命令：</p>
+<p><code>nmap 192.168.1.1/24</code></p>
+<p>也可以<strong>扫描指定的主机</strong></p>
+<ul>
+<li><code>nmap 192.168.1.101</code></li>
+<li><code>nmap 192.168.101 192.168.1.102</code></li>
+<li><code>namp 192.168.1.100-200</code></li>
+<li><code>nmap -iL target.txt</code> （targe.txt存储IP地址列表）</li>
+</ul>
+<p>主机发现也叫做ping扫描，但不只是简单的发送ICMP回声请求报文，可以指定参数<code>-P&lt;C&gt;</code>来选择ping的类型(即使指定ping类型，ARP发现-PR对局域网还是默认有的，因为又快又有效)</p>
+<p><strong>控制主机发现的参数：</strong></p>
+<ul>
+<li><p>-sL(列表扫描)：仅仅列出指定网络上的主机，不发送报文</p>
+</li>
+<li><p>-sP(ping扫描)：仅仅进行ping扫描，打印出回应的主机</p>
+</li>
+<li><p>-P0(无ping)：nmap默认只对运行的主机进行扫描，-P0会对每一个指定的IP地址进行扫描</p>
+</li>
+<li><p>-PS(TCP SYN Ping)：发送设置了SYN标志位的空TCP报文</p>
+</li>
+<li><p>-PA(TCP ACK Ping)：设置ACK位</p>
+</li>
+<li><p>-PU(UDP Ping)：发送UDP报文，可以穿过只对TCP过滤的防火墙</p>
+</li>
+<li><p>-PR(ARP Ping)：<strong>默认用的扫描方式</strong>，局域网好用</p>
+</li>
+</ul>
+<h1 id="扫描端口"><a href="#扫描端口" class="headerlink" title="扫描端口"></a>扫描端口</h1><p>发现要扫描的主机后，可以针对单个主机进行扫描,端口扫描格式为<code>namp -s&lt;C&gt;</code></p>
+<ul>
+<li><p>-sS(TCP SYN扫描)：半开放扫描，发送SYN报文，不容易被注意到，是<strong>默认扫描方式</strong></p>
+</li>
+<li><p>-sT(TCP connect()扫描)：全连接扫描，仅当SYN不行时使用一下，慢</p>
+</li>
+<li><p>-sU(UDP扫描)：扫描UDP服务，较慢，可以搭配TCP扫描一起用</p>
+</li>
+<li><p>-sA(TCP ACK扫描)：不发现端口情况，用于发现防火墙规则</p>
+</li>
+<li><p>-scanflags(定制TCP扫描)：定制报文标志位，巧妙绕过入侵检测</p>
+</li>
+<li><p>-sI：高级扫描，盲扫描，没有报文从自己的真实IP发送，机端隐蔽！</p>
+</li>
+</ul>
+<h1 id="服务和版本探测"><a href="#服务和版本探测" class="headerlink" title="服务和版本探测"></a>服务和版本探测</h1><p><code>-sV</code>参数用来版本探测，其他暂时不学</p>
+<h1 id="操作系统探测"><a href="#操作系统探测" class="headerlink" title="操作系统探测"></a>操作系统探测</h1><p><code>-O</code> 启用操作系统检测(大写英文字母O)</p>
+<h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><ul>
+<li>-oN：标准输出，后接文件名</li>
+<li>-oX：XML输出</li>
+</ul>
+<h1 id="其他参数"><a href="#其他参数" class="headerlink" title="其他参数"></a>其他参数</h1><ul>
+<li>-v：显示扫描过程细节</li>
+<li>-T4：时间选项，T后面接数字，默认是T3，T4可以更快</li>
+</ul>
+<h1 id="究极扫描"><a href="#究极扫描" class="headerlink" title="究极扫描!"></a>究极扫描!</h1><p><code>nmap -A</code></p>
+<p>全面扫描，包括-O和-sV，忘记参数或者不懂的时候-A就完事了</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/28/linux命令-3-iwlist/" rel="next" title="linux命令-3-iwlist">
+                <i class="fa fa-chevron-left"></i> linux命令-3-iwlist
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/30/ssh配置/" rel="prev" title="ssh配置">
+                ssh配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#发现主机"><span class="nav-number">1.</span> <span class="nav-text">发现主机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扫描端口"><span class="nav-number">2.</span> <span class="nav-text">扫描端口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务和版本探测"><span class="nav-number">3.</span> <span class="nav-text">服务和版本探测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作系统探测"><span class="nav-number">4.</span> <span class="nav-text">操作系统探测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输出"><span class="nav-number">5.</span> <span class="nav-text">输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他参数"><span class="nav-number">6.</span> <span class="nav-text">其他参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#究极扫描"><span class="nav-number">7.</span> <span class="nav-text">究极扫描!</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

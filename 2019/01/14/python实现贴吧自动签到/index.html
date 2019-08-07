@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前面学urllib，学cookie，学re，都是为了这个小脚本，结果用urllib获取关注的贴吧列表时，发送请求会有个重定向，导致重定向后没有cookie，也就得到一个空列表，本以为requests库以urllib为基础建立，urllib应该更强大一点，特地系统学了学，结果还不如老老实实用requests库，requests库处理爬虫是真的厉害 签到的请求 打开一个贴吧签到页面，在签到前，F12，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现贴吧自动签到">
+<meta property="og:url" content="http://yoursite.com/2019/01/14/python实现贴吧自动签到/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="前面学urllib，学cookie，学re，都是为了这个小脚本，结果用urllib获取关注的贴吧列表时，发送请求会有个重定向，导致重定向后没有cookie，也就得到一个空列表，本以为requests库以urllib为基础建立，urllib应该更强大一点，特地系统学了学，结果还不如老老实实用requests库，requests库处理爬虫是真的厉害 签到的请求 打开一个贴吧签到页面，在签到前，F12，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/6gxAuD3.png">
+<meta property="og:image" content="https://i.imgur.com/6KYGbCE.png">
+<meta property="og:image" content="https://i.imgur.com/NsCxF09.png">
+<meta property="og:image" content="https://i.imgur.com/2V8If2H.png">
+<meta property="og:image" content="https://i.imgur.com/oGDhEPF.png">
+<meta property="og:image" content="https://i.imgur.com/GbthU4A.png">
+<meta property="og:image" content="https://i.imgur.com/srwvyeV.png">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python实现贴吧自动签到">
+<meta name="twitter:description" content="前面学urllib，学cookie，学re，都是为了这个小脚本，结果用urllib获取关注的贴吧列表时，发送请求会有个重定向，导致重定向后没有cookie，也就得到一个空列表，本以为requests库以urllib为基础建立，urllib应该更强大一点，特地系统学了学，结果还不如老老实实用requests库，requests库处理爬虫是真的厉害 签到的请求 打开一个贴吧签到页面，在签到前，F12，">
+<meta name="twitter:image" content="https://i.imgur.com/6gxAuD3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/14/python实现贴吧自动签到/"/>
+
+
+
+
+
+  <title>python实现贴吧自动签到 | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/14/python实现贴吧自动签到/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python实现贴吧自动签到</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-14T20:31:13+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前面学urllib，学cookie，学re，都是为了这个小脚本，结果用urllib获取关注的贴吧列表时，发送请求会有个重定向，导致重定向后没有cookie，也就得到一个空列表，本以为requests库以urllib为基础建立，urllib应该更强大一点，特地系统学了学，结果还不如老老实实用requests库，requests库处理爬虫是真的厉害</p>
+<h1 id="签到的请求"><a href="#签到的请求" class="headerlink" title="签到的请求"></a>签到的请求</h1><hr>
+<p>打开一个贴吧签到页面，在签到前，F12，然后点击签到，即可得到签到时发送的请求，点击Network，要的是request请求，筛选XHR，有个add请求，明显就是我们要找的</p>
+<p><img src="https://i.imgur.com/6gxAuD3.png" alt=""></p>
+<p>得到了请求的url <code>http://tieba.baidu.com/sign/add</code></p>
+<p>方法是POST，即还有参数，往下看，发现了参数格式</p>
+<p><img src="https://i.imgur.com/6KYGbCE.png" alt=""></p>
+<p>tbs可以复用，即每个贴吧可以共用，现在只需要得到所有贴吧的名字，然后做好对应的data，post发送即可，cookie后面获取名字时再弄，毕竟先弄好名字列表，才能签到</p>
+<h1 id="获取关注的贴吧列表"><a href="#获取关注的贴吧列表" class="headerlink" title="获取关注的贴吧列表"></a>获取关注的贴吧列表</h1><hr>
+<p>从贴吧里找到我的贴吧界面<br><img src="https://i.imgur.com/NsCxF09.png" alt=""></p>
+<p>用F12打开后，点击Network，按一下F5重新加载一下网页，得到一堆结果，我们要的是request请求，筛选选择XHR后就简单多了</p>
+<p><img src="https://i.imgur.com/2V8If2H.png" alt=""></p>
+<p>发现有个mylike请求，双击点开发现正是关注贴吧的列表</p>
+<p>具体看一下该请求</p>
+<p><img src="https://i.imgur.com/oGDhEPF.png" alt=""></p>
+<p>得到了请求的url为  <code>http://tieba.baidu.com/f/like/mylike?v=1547438620259</code></p>
+<p>请求方法为 GET</p>
+<p>下面也有请求头部的信息，里面包含了cookie，不管那么多，直接全部复制头部信息，进入python代码里，处理只需加一下单引号和逗号就能构造好带有自己cookie的头部</p>
+<p><img src="https://i.imgur.com/GbthU4A.png" alt=""></p>
+<p>代码里的头部构造，复制过来后修改的地方非常少，看着很花里胡哨，其实很省心</p>
+<p><img src="https://i.imgur.com/srwvyeV.png" alt=""></p>
+<p>这里请求贴吧列表时有个重定向，用urllib中的opener不行，这里用requests的Session来处理，即可重定向时照样保存cookie信息</p>
+<pre><code>like_url = &apos;http://tieba.baidu.com/f/like/mylike?v=1547424142305&apos;
+s = requests.Session()
+html = s.get(like_url, headers=head)
+html = html.content.decode(&apos;gbk&apos;)
+</code></pre><p>用正则表达式来从网页源码中找到关注贴吧的名字</p>
+<pre><code>p = re.compile(r&apos;title=&quot;(.+?)&quot;&gt;\1&lt;/a&gt;&lt;/td&gt;&apos;)
+like_result += p.findall(html)
+</code></pre><p>具体正则怎么写，慢慢看网页元素，找对应名字所在字符串的模式</p>
+<h1 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h1><hr>
+<p>思路简单，代码也简单，直接上代码</p>
+<pre><code>import requests
+import urllib.error
+import re
+
+head = {
+    &apos;Accept&apos;: &apos;text/html, */*; q=0.01&apos;,
+    &apos;Accept-Encoding&apos;: &apos;gzip, deflate&apos;,
+    &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,
+    &apos;Connection&apos;: &apos;keep-alive&apos;,
+    &apos;Cookie&apos;: &apos;BAIDUID=6DBDEEF7FB3A324BC86AC949E15E20:FG=1; BIDUPSID=6DBDEEF7FB3A324B34C86AC949E15E20; &apos;
+          &apos;PSTM=1547101880; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; TIEBA_USERTYPE=9c139eef6f78a9429a629ca7; &apos;
+          &apos;bdshare_firstime=1547105555949; &apos;
+              &apos;BDUSS=kp5ZTRaeE9AAEAAAA6218rx&apos;
+          &apos;-DGu7n7zrbEzMzHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFwyO1xcMjtcN; &apos;
+          &apos;TIEBAUID=04e88654c6a4bf37b1a22cf8; &apos;
+          &apos;STOKEN=0d161708b5a11e3029cca3d3b7a9fa5b4f9ccb486475ab12c3a8b; &apos;
+          &apos;H_PS_PSSID=1442_21119_28132_28267; Hm_lvt_98b9d8c2fd6608d564bf2ac2ae642948=1547417142,1547419494,&apos;
+          &apos;1547419533,1547424956; delPer=0; PSINO=5; &apos;
+          &apos;PMS_JT=%28%7B%22s%22%3A1547425493177%2C%22r%22%3A%22http%3A//tieba.baidu.com/home/main%3Fun%3D%25E9&apos;
+          &apos;%259D%2592%25E8%258B%25B9%25E6%259E%259C%25E5%2591%25B3%25E5%25A5%25B6%25E7%25B3%2596%26fr%3Dibaidu&apos;
+          &apos;%26ie%3Dutf-8%22%7D%29; Hm_lpvt_98b9d8c2fd6608d564bf2ac2ae642948=1547425494&apos;,
+    &apos;Host&apos;: &apos;tieba.baidu.com&apos;,
+    &apos;Referer&apos;: &apos;http://tieba.baidu.com/i/i/forum&apos;,
+    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) &apos;
+              &apos;Chrome/71.0.3578.98 Safari/537.36&apos;,
+    &apos;X-Requested-With&apos;: &apos;XMLHttpRequest&apos;
+}
+
+like_url = &apos;http://tieba.baidu.com/f/like/mylike?v=1547424142305&apos;
+sign_url = &apos;http://tieba.baidu.com/sign/add&apos;
+tbs = &apos;4fb45fea4498360d1547435295&apos;
+
+like_result = []
+try:
+    s = requests.Session()
+    html = s.get(like_url, headers=head)
+    html = html.content.decode(&apos;gbk&apos;)
+    p = re.compile(r&apos;title=&quot;(.+?)&quot;&gt;\1&lt;/a&gt;&lt;/td&gt;&apos;)
+    like_result += p.findall(html)
+except urllib.error.HTTPError as e:
+    print(e.reason)
+
+for name in like_result:
+    data = {
+        &apos;ie&apos;: &apos;utf-8&apos;,
+        &apos;kw&apos;: name,
+        &apos;tbs&apos;: tbs
+    }
+    try:
+        r = requests.post(sign_url, data=data, headers=head)
+    except urllib.error.HTTPError as e:
+        print(e.reason)
+</code></pre><p>cookie已悄悄修改，防止泄露 :(</p>
+<p>放到自己的服务器上，用crontab来定时任务</p>
+<p><code>crontab -e</code></p>
+<p>设置每天6点执行该签到脚本，在里面加入这句话</p>
+<p><code>0 6 * * * python3 /root/python/tieba/sign.py</code></p>
+<p>保存退出</p>
+<p>搞定，日后在搞输出签到日志</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/13/python正则表达式/" rel="next" title="python正则表达式">
+                <i class="fa fa-chevron-left"></i> python正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/28/linux命令-1-ifconfig/" rel="prev" title="linux命令-1-ifconfig">
+                linux命令-1-ifconfig <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#签到的请求"><span class="nav-number">1.</span> <span class="nav-text">签到的请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取关注的贴吧列表"><span class="nav-number">2.</span> <span class="nav-text">获取关注的贴吧列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#签到"><span class="nav-number">3.</span> <span class="nav-text">签到</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

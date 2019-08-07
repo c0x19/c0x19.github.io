@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python中正则表达式用re库 pattern pattern是正则中的模式字符串，代表了要匹配的规则 元字符   字符 含义     . 匹配任意一个字符，除了”\n”   \ 转义字符，使后面的特殊字符变成普通字符，使普通字符变成特殊字符   * 匹配前一个字符0次或多次   + 匹配前一个字符1次或多次   ? 匹配前一个字符0次或1次   ^ 匹配字符串开头，在多行模式中匹配每一行的开头">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python正则表达式">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/python正则表达式/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="python中正则表达式用re库 pattern pattern是正则中的模式字符串，代表了要匹配的规则 元字符   字符 含义     . 匹配任意一个字符，除了”\n”   \ 转义字符，使后面的特殊字符变成普通字符，使普通字符变成特殊字符   * 匹配前一个字符0次或多次   + 匹配前一个字符1次或多次   ? 匹配前一个字符0次或1次   ^ 匹配字符串开头，在多行模式中匹配每一行的开头">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python正则表达式">
+<meta name="twitter:description" content="python中正则表达式用re库 pattern pattern是正则中的模式字符串，代表了要匹配的规则 元字符   字符 含义     . 匹配任意一个字符，除了”\n”   \ 转义字符，使后面的特殊字符变成普通字符，使普通字符变成特殊字符   * 匹配前一个字符0次或多次   + 匹配前一个字符1次或多次   ? 匹配前一个字符0次或1次   ^ 匹配字符串开头，在多行模式中匹配每一行的开头">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/13/python正则表达式/"/>
+
+
+
+
+
+  <title>python正则表达式 | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/python正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-13T22:55:11+08:00">
+                2019-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python中正则表达式用re库</p>
+<h1 id="pattern"><a href="#pattern" class="headerlink" title="pattern"></a>pattern</h1><hr>
+<p>pattern是正则中的模式字符串，代表了要匹配的规则</p>
+<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><table>
+<thead>
+<tr>
+<th>字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td style="text-align:center">匹配任意一个字符，除了”\n”</td>
+</tr>
+<tr>
+<td>\</td>
+<td style="text-align:center">转义字符，使后面的特殊字符变成普通字符，使普通字符变成特殊字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td style="text-align:center">匹配前一个字符0次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td style="text-align:center">匹配前一个字符1次或多次</td>
+</tr>
+<tr>
+<td>?</td>
+<td style="text-align:center">匹配前一个字符0次或1次</td>
+</tr>
+<tr>
+<td>^</td>
+<td style="text-align:center">匹配字符串开头，在多行模式中匹配每一行的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td style="text-align:center">匹配字符串结尾，在多行模式下匹配每一行的结尾</td>
+</tr>
+<tr>
+<td><code>&#124;</code></td>
+<td style="text-align:center">匹配左右表达式中的任意一个</td>
+</tr>
+<tr>
+<td>{}</td>
+<td style="text-align:center">{m}匹配前一个字符m次，{m,n}匹配前一个字符m到n次，n不写代表无限次</td>
+</tr>
+<tr>
+<td>[]</td>
+<td style="text-align:center">匹配字符集中的任意一个字符，[abc]即abc中任意一个，[a-z]即a-z  26个字母中任意一个，[^abc]代表所有字符中除去abc的任意一个字符</td>
+</tr>
+<tr>
+<td>()</td>
+<td style="text-align:center">分组，里面是一个整体pattern，和算术中()一样优先处理，然后结果返回出来，从左开始数（按左括号计数）编号为1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="预定义字符集"><a href="#预定义字符集" class="headerlink" title="预定义字符集"></a>预定义字符集</h2><table>
+<thead>
+<tr>
+<th>字符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\d</td>
+<td style="text-align:center">数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td style="text-align:center">非数字</td>
+</tr>
+<tr>
+<td>\s</td>
+<td style="text-align:center">空白字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td style="text-align:center">非空白字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td style="text-align:center">包括下划线在内的任何字符</td>
+</tr>
+<tr>
+<td>\W</td>
+<td style="text-align:center">特殊字符，即非字母字符</td>
+</tr>
+<tr>
+<td>\A</td>
+<td style="text-align:center">仅匹配字符串开头，同^</td>
+</tr>
+<tr>
+<td>\z</td>
+<td style="text-align:center">仅匹配字符串结尾，同$</td>
+</tr>
+<tr>
+<td>\b</td>
+<td style="text-align:center">匹配位于单词开始或结束位置的空字符串</td>
+</tr>
+<tr>
+<td>\数字</td>
+<td style="text-align:center">匹配索引对应分组捕获到的内容一样的字符串</td>
+</tr>
+</tbody>
+</table>
+<h1 id="标志"><a href="#标志" class="headerlink" title="标志"></a>标志</h1><hr>
+<p>在调用函数时，有个可选的参数flag，代表了一些规则</p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>re.I</td>
+<td style="text-align:center">使匹配忽略大小写</td>
+</tr>
+<tr>
+<td>re.S</td>
+<td style="text-align:center">使.匹配包括”\n”在内的所有字符</td>
+</tr>
+<tr>
+<td>re.M</td>
+<td style="text-align:center">多行匹配，影响^和$</td>
+</tr>
+</tbody>
+</table>
+<h1 id="re库中的函数"><a href="#re库中的函数" class="headerlink" title="re库中的函数"></a>re库中的函数</h1><hr>
+<h2 id="re-compile"><a href="#re-compile" class="headerlink" title="re.compile()"></a>re.compile()</h2><ul>
+<li>作用：预编译正则表达式pattern，返回一个正则表达式对象，当多次使用该表达式时，这样可以提高性能</li>
+<li>参数<ul>
+<li>pattern：正则表达式</li>
+<li>flag：可选参数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>返回对象：正则表达式对象</li>
+<li>返回对象的方法：下面介绍的所有函数都可以被该对象调用，调用时函数中的pattern参数就不用写了</li>
+</ul>
+<h2 id="re-match"><a href="#re-match" class="headerlink" title="re.match()"></a>re.match()</h2><ul>
+<li><p>作用：从字符串最开始与pattern匹配，开始不匹配直接失败，返回None，成功返回匹配对象，是一个match对象</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern：正则表达式，可以是字符串，也可以是re.compile()产生的正则表达式对象</li>
+<li>string：待匹配的字符串</li>
+<li>flag：可选参数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>返回值：match对象</p>
+</li>
+<li><p>match对象的属性</p>
+<ul>
+<li>match对象自带布尔值，表示匹配成功与否</li>
+<li>string：待匹配的文本</li>
+<li>re：匹配时使用的pattern对象，即正则表达式</li>
+<li>pos：正则表达式搜索文本的开始位置</li>
+<li>endpos：正则表达式搜索文本的结束文章</li>
+</ul>
+</li>
+<li><p>match对象的方法</p>
+<ul>
+<li>group(num=0)：返回match对象中匹配到的字符串结果，参数默认是0，即返回全部字符串，也可加入数字，返回匹配pattern中的对应分组结果的字符串</li>
+<li>groups(default=None)：返回包含所有匹配子组的元组</li>
+<li>start()：返回匹配结果在查找字符串中开始的位置</li>
+<li>end()：返回匹配结果在查找字符串中结束的位置</li>
+<li>span()：返回一个位置元组(开始，结束)，即上面两个函数形成一个元组</li>
+</ul>
+</li>
+</ul>
+<h2 id="re-search"><a href="#re-search" class="headerlink" title="re.search()"></a>re.search()</h2><ul>
+<li><p>作用：与match()只从头匹配不同，是从任意位置查找第一次匹配的内容，失败返回None，成功返回一个match对象</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern：正则表达式</li>
+<li>string：待匹配的字符串</li>
+<li>flag：可选参数</li>
+</ul>
+</li>
+<li><p>返回值：match对象,该对象参考match()函数介绍</p>
+</li>
+</ul>
+<h2 id="re-findall"><a href="#re-findall" class="headerlink" title="re.findall()"></a>re.findall()</h2><ul>
+<li><p>作用：查找所有(非重复)匹配正则表达式的结果</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern：正则表达式</li>
+<li>string：待匹配的字符串</li>
+<li>flag：可选参数</li>
+</ul>
+</li>
+<li><p>返回值：一个包括所有匹配字符串结果的list</p>
+</li>
+</ul>
+<h2 id="re-finditer"><a href="#re-finditer" class="headerlink" title="re.finditer()"></a>re.finditer()</h2><ul>
+<li><p>作用：搜索字符串，返回一个匹配结果的迭代器，每个元素是match对象，即相当于search()函数不停执行，把每次得到的match对象合起来返回一个迭代器</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern</li>
+<li>string</li>
+<li>flag</li>
+</ul>
+</li>
+<li><p>返回值：match对象的迭代器</p>
+</li>
+</ul>
+<h2 id="re-split"><a href="#re-split" class="headerlink" title="re.split()"></a>re.split()</h2><ul>
+<li><p>作用：把正则表达式匹配的字符串当作分割符，把原字符串分割成子串，返回分割得到子串的列表</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern</li>
+<li>string</li>
+<li>maxsplit：可选参数，最大分割数</li>
+<li>flag</li>
+</ul>
+</li>
+<li><p>返回值：分割后得到的子串的list</p>
+</li>
+</ul>
+<h2 id="re-sup"><a href="#re-sup" class="headerlink" title="re.sup()"></a>re.sup()</h2><ul>
+<li><p>作用：替换正则表达式匹配到的子串，返回替换后的字符串</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>pattern</li>
+<li>repl：替换字符串</li>
+<li>string：待匹配和替换的原字符串</li>
+<li>count：可选参数，最大替换次数</li>
+<li>flag</li>
+</ul>
+</li>
+<li><p>返回值：替换后的字符串</p>
+</li>
+</ul>
+<h1 id="贪婪匹配与惰性匹配"><a href="#贪婪匹配与惰性匹配" class="headerlink" title="贪婪匹配与惰性匹配"></a>贪婪匹配与惰性匹配</h1><hr>
+<p>当用 * 或 + 这种可代表不限量的特殊模式时，就出现了问题，对原字符串<code>1bc21ef2</code> ，用1开头，2结尾模式来匹配，结果可以是<code>1bc2</code>和<code>1ef2</code>,也可以是长串<code>1bc21df2</code>，前者情况称为惰性匹配，后者称为贪婪匹配</p>
+<ul>
+<li>贪婪匹配：用 <code>1.*2</code> 来代表，即 <code>.*</code> 或 <code>.+</code>  代表贪婪匹配</li>
+<li>惰性匹配：用 <code>1.*?2</code> 来代表，即 <code>.*?</code> 或 <code>.+?</code> 代表惰性匹配</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/cookiejar/" rel="next" title="cookiejar">
+                <i class="fa fa-chevron-left"></i> cookiejar
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/python实现贴吧自动签到/" rel="prev" title="python实现贴吧自动签到">
+                python实现贴吧自动签到 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pattern"><span class="nav-number">1.</span> <span class="nav-text">pattern</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#元字符"><span class="nav-number">1.1.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预定义字符集"><span class="nav-number">1.2.</span> <span class="nav-text">预定义字符集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标志"><span class="nav-number">2.</span> <span class="nav-text">标志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#re库中的函数"><span class="nav-number">3.</span> <span class="nav-text">re库中的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#re-compile"><span class="nav-number">3.1.</span> <span class="nav-text">re.compile()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-match"><span class="nav-number">3.2.</span> <span class="nav-text">re.match()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-search"><span class="nav-number">3.3.</span> <span class="nav-text">re.search()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-findall"><span class="nav-number">3.4.</span> <span class="nav-text">re.findall()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-finditer"><span class="nav-number">3.5.</span> <span class="nav-text">re.finditer()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-split"><span class="nav-number">3.6.</span> <span class="nav-text">re.split()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re-sup"><span class="nav-number">3.7.</span> <span class="nav-text">re.sup()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#贪婪匹配与惰性匹配"><span class="nav-number">4.</span> <span class="nav-text">贪婪匹配与惰性匹配</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

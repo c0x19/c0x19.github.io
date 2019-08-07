@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu18.04配置php5.6环境">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu18.04配置php5.6环境">
+<meta name="twitter:description" content="apache 安装sudo apt-get install apache2 服务使用 开启 sudo /etc/init.d/apache2 restar 停止 sudo /etc/init.d/apache2 stop 重启 sudo /etc/init.d/apache2 restar  推荐用下面这种方法，记起来简单，通用  开启 sudo service apache2 start 停止">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/"/>
+
+
+
+
+
+  <title>ubuntu18.04配置php5.6环境 | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/ubuntu18-04配置php5.6环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ubuntu18.04配置php5.6环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T17:28:52+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><hr>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install apache2</code></p>
+<h2 id="服务使用"><a href="#服务使用" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
+<li>开启 <code>sudo /etc/init.d/apache2 restar</code></li>
+<li>停止 <code>sudo /etc/init.d/apache2 stop</code></li>
+<li>重启 <code>sudo /etc/init.d/apache2 restar</code></li>
+</ul>
+<p>推荐用下面这种方法，记起来简单，通用</p>
+<ul>
+<li>开启 <code>sudo service apache2 start</code></li>
+<li>停止 <code>sudo service apache2 stop</code></li>
+<li>重启 <code>sudo service apache2 restart</code></li>
+<li>查看状态 <code>sudo service apache2 status</code></li>
+</ul>
+<p>开启服务后，打开浏览器，进入<code>localhost</code>或<code>127.0.0.1</code>查看是否成功</p>
+<h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><hr>
+<h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>此处用的是php5.6</p>
+<ol>
+<li>sudo aptitude purge `dpkg -l | grep php| awk ‘{print $2}’ |tr “\n” “ “`</li>
+<li><code>sudo add-apt-repository ppa:ondrej/php</code></li>
+<li><code>sudo apt-get update</code></li>
+<li><code>sudo apt-get install php5.6</code></li>
+</ol>
+<p>安装后输入<code>php -v</code>查看是否完成</p>
+<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><hr>
+<h2 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h2><p><code>sudo apt-get install mysql-server mysql-client</code></p>
+<p>安装的时候竟然没有提示输入root密码，如果成功设置密码的可忽略修改密码步骤</p>
+<p>先说一下服务的使用，再说修改密码</p>
+<h2 id="服务使用-1"><a href="#服务使用-1" class="headerlink" title="服务使用"></a>服务使用</h2><ul>
+<li>开启 <code>sudo service mysql start</code></li>
+<li>停止 <code>sudo service mysql stop</code></li>
+<li>重启 <code>sudo service mysql restart</code></li>
+</ul>
+<p>可参考apache，ubuntu的服务命令套路</p>
+<h2 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h2><p>进入mysql默认的用户</p>
+<p><code>sudo vim /etc/mysql/debian.cnf</code></p>
+<p>找到这句话：password = Gt0MWsNmNv3gOW9P    复制该密码<br><code>mysql -u debian-sys-maint -p</code></p>
+<p>然后粘贴输入该密码，进入mysql</p>
+<ol>
+<li><code>use mysql;</code></li>
+<li><code>update user set authentication_string=PASSWORD(&quot;自定义密码&quot;) where user=&#39;root&#39;;</code></li>
+<li><code>update user set plugin=&quot;mysql_native_password&quot;;</code></li>
+<li><code>flush privileges;</code></li>
+<li><code>quit</code></li>
+</ol>
+<p>重启服务即可</p>
+<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><hr>
+<p>将php和apache连接起来</p>
+<p><code>sudo apt-get install libapache2-mod-php5.6</code></p>
+<p>对php扩展mysql</p>
+<p><code>sudo apt-get install php5.6-mysql</code></p>
+<p>php还有很多别的扩展，输入<code>sudo apt-get install php5.6-</code> 再按两下tab键，即可看到</p>
+<h1 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h1><hr>
+<p>为了方便使用，更改apache的根目录（写的项目放于此处）</p>
+<p>在桌面新建web文件夹</p>
+<p><code>sudo ln -s /home/nik/Desktop/web /var/www/html</code></p>
+<p>此时在web目录中创建cwd.php，添加如下</p>
+<pre><code>&lt;?php  
+    echo &quot;MFFL&quot;;
+?&gt; 
+</code></pre><p>在浏览器输入<code>localhost/web/cwd.php</code>，检查成功</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/06/简单sql注入过程/" rel="prev" title="简单sql注入过程">
+                简单sql注入过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#apache"><span class="nav-number">1.</span> <span class="nav-text">apache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务使用"><span class="nav-number">1.2.</span> <span class="nav-text">服务使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php"><span class="nav-number">2.</span> <span class="nav-text">php</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-2"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务使用-1"><span class="nav-number">3.2.</span> <span class="nav-text">服务使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改root密码"><span class="nav-number">3.3.</span> <span class="nav-text">修改root密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接"><span class="nav-number">4.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装完成"><span class="nav-number">5.</span> <span class="nav-text">安装完成</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

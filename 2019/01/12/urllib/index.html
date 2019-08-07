@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="python2中的urllib和urllib2合在一起了，统一成python3中的urllib库，其中有4个模块：request、error、parse、robotparser  request模块用来打开和读取url error模块包括一些request产生的错误，用try来捕捉处理 parse模块用来解析url robotparser模块用来解析robots.txt文件  request 打开">
+<meta property="og:type" content="article">
+<meta property="og:title" content="urllib">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/urllib/index.html">
+<meta property="og:site_name" content="c0x19">
+<meta property="og:description" content="python2中的urllib和urllib2合在一起了，统一成python3中的urllib库，其中有4个模块：request、error、parse、robotparser  request模块用来打开和读取url error模块包括一些request产生的错误，用try来捕捉处理 parse模块用来解析url robotparser模块用来解析robots.txt文件  request 打开">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-07T01:15:13.904Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="urllib">
+<meta name="twitter:description" content="python2中的urllib和urllib2合在一起了，统一成python3中的urllib库，其中有4个模块：request、error、parse、robotparser  request模块用来打开和读取url error模块包括一些request产生的错误，用try来捕捉处理 parse模块用来解析url robotparser模块用来解析robots.txt文件  request 打开">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/12/urllib/"/>
+
+
+
+
+
+  <title>urllib | c0x19</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">c0x19</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/urllib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">urllib</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T17:59:58+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>python2中的urllib和urllib2合在一起了，统一成python3中的urllib库，其中有4个模块：request、error、parse、robotparser</p>
+<ul>
+<li>request模块用来打开和读取url</li>
+<li>error模块包括一些request产生的错误，用try来捕捉处理</li>
+<li>parse模块用来解析url</li>
+<li>robotparser模块用来解析robots.txt文件</li>
+</ul>
+<h1 id="request"><a href="#request" class="headerlink" title="request"></a>request</h1><hr>
+<p>打开并读取URL，可以</p>
+<ul>
+<li>打开直接一个url链接，</li>
+<li>也可以由自己制定一个request对象来打开</li>
+</ul>
+<h2 id="url-request-urlopen"><a href="#url-request-urlopen" class="headerlink" title="url.request.urlopen()"></a>url.request.urlopen()</h2><ul>
+<li><p>作用：打开一个url请求， 并得到返回的响应</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>url : 网址链接</li>
+<li>data ：post提交的参数，可以不写，默认为None，用字典存储，请求发送前要转换成bytes格式</li>
+<li>timeout : 设置访问超时时间</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>返回对象: HTTPResponse对象</p>
+</li>
+<li><p>返回对象提供的方法</p>
+<ul>
+<li>read() ：读取网页源代码，数据格式为bytes，需要用decode()转成str格式，类似还有readline(), readlines(), fileno(), close()</li>
+<li>geturl() : 得到自己开始请求的url</li>
+<li>getcode() : 得到http状态码，200代表成功</li>
+<li>info() : 返回HTTPMessage对象，表示服务器响应返回的头信息</li>
+</ul>
+</li>
+</ul>
+<p>虽然可以发送请求，但不可以自己设置请求头部中的数据，urllib.request模块提供了Request()方法来自定义一个request请求对象，然后用上面的urllib.request.urlopen()来发送该request对象</p>
+<h2 id="url-request-Request"><a href="#url-request-Request" class="headerlink" title="url.request.Request()"></a>url.request.Request()</h2><ul>
+<li><p>作用：产生一个request对象，可以用上面的urlopen()来请求这个对象</p>
+</li>
+<li><p>参数</p>
+<ul>
+<li>url : 网址链接</li>
+<li>data : post请求的参数,可以不写，默认为None，用字典存储，请求发送前要转换成bytes格式，也可以先不处理，然后在urlopen()时添加data</li>
+<li>headers : 用字典来存储头部数据，默认为{}, 发送请求前不需要转换数据格式</li>
+</ul>
+</li>
+<li><p>返回对象: HTTPRequest</p>
+</li>
+<li><p>返回对象提供的方法</p>
+<ul>
+<li>add_data(data) : 设置追加data</li>
+<li>has_data() : 查看是否有了data参数</li>
+<li>get_data() : 获取data参数的数据</li>
+<li>add_header(key, value) : 添加头部信息，即按字典格式，key和value</li>
+<li>get_full_url() : 获取请求的url</li>
+<li>get_method() : 请求方法，一般返回GET或者POST</li>
+<li>set_proxy(host, type) : 设置代理，第一参数是socket（ip：端口）,第二个参数是代理类型，http或https</li>
+</ul>
+</li>
+</ul>
+<p>创建好request对象后即可用urllib.request.urlopen()来请求发送</p>
+<p>PS：data参数设置了即为post，没有设置即为get，get传递参数需要先把参数数据字典格式转成bytes然后追加到url上</p>
+<h1 id="error"><a href="#error" class="headerlink" title="error"></a>error</h1><hr>
+<h2 id="urllib-error-URLError"><a href="#urllib-error-URLError" class="headerlink" title="urllib.error.URLError"></a>urllib.error.URLError</h2><p>所有异常的基类，所有请求过程中的异常都可以被这个捕获到，通过reason属性来查看异常原因</p>
+<pre><code>try:
+    re = urllib.request.urlopen(&quot;http://www.baidu.com&quot;)
+except urllib.error.URLError as e:
+    print(e.reason)
+</code></pre><h2 id="urllib-error-HTTPError"><a href="#urllib-error-HTTPError" class="headerlink" title="urllib.error.HTTPError"></a>urllib.error.HTTPError</h2><p>http错误，具体没搞清楚，反正用上面的基类URLError就好了</p>
+<h1 id="parse"><a href="#parse" class="headerlink" title="parse"></a>parse</h1><hr>
+<p>常用bytes和str的数据转换</p>
+<p>data发送前，需要将字典str格式转成url的bytes格式</p>
+<pre><code>data = urllib.parse.urlencode(data).encode(&apos;utf-8&apos;)
+</code></pre><p>对于收到的HTTPResponse对象，读取的bytes格式要转成str</p>
+<pre><code>re = re.read.decode(&apos;utf-8&apos;)
+</code></pre><p>还有其他对url的处理,需要的时候再系统学吧</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/两台电脑共用博客/" rel="next" title="两台电脑共用博客">
+                <i class="fa fa-chevron-left"></i> 两台电脑共用博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/12/cookiejar/" rel="prev" title="cookiejar">
+                cookiejar <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">忖度</p>
+              <p class="site-description motion-element" itemprop="description">恭喜达拉斯独行侠队获得2020年NBA总冠军</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#request"><span class="nav-number">1.</span> <span class="nav-text">request</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#url-request-urlopen"><span class="nav-number">1.1.</span> <span class="nav-text">url.request.urlopen()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#url-request-Request"><span class="nav-number">1.2.</span> <span class="nav-text">url.request.Request()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#error"><span class="nav-number">2.</span> <span class="nav-text">error</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#urllib-error-URLError"><span class="nav-number">2.1.</span> <span class="nav-text">urllib.error.URLError</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#urllib-error-HTTPError"><span class="nav-number">2.2.</span> <span class="nav-text">urllib.error.HTTPError</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parse"><span class="nav-number">3.</span> <span class="nav-text">parse</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">忖度</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
