@@ -232,6 +232,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/30/ssh配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/30/ssh配置/" itemprop="url">ssh配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-30T15:31:11+08:00">
+                2019-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>因为要搞ssh渗透，学习和配置一下ssh服务，环境是两个虚拟机，靶机ubuntu18.04，客户端kali</p>
+<h1 id="ssh服务端配置"><a href="#ssh服务端配置" class="headerlink" title="ssh服务端配置"></a>ssh服务端配置</h1><hr>
+<p>在作为服务端的虚拟机ubuntu18.04上配置ssh server</p>
+<h2 id="安装ssh-server"><a href="#安装ssh-server" class="headerlink" title="安装ssh server"></a>安装ssh server</h2><p><code>sudo apt-get install openssh-server</code></p>
+<h2 id="查看并开启服务"><a href="#查看并开启服务" class="headerlink" title="查看并开启服务"></a>查看并开启服务</h2><p>安装完成后，ssh服务默认是开启的，下面是对服务的一些操作</p>
+<ul>
+<li><p>查看状态：<code>sudo serivce ssh status</code></p>
+</li>
+<li><p>开启：<code>sudo service ssh start</code></p>
+</li>
+<li><p>停止：<code>sudo service ssh stop</code></p>
+</li>
+<li><p>重启：<code>sudo service ssh restart</code></p>
+</li>
+</ul>
+<h2 id="开启root密码登录"><a href="#开启root密码登录" class="headerlink" title="开启root密码登录"></a>开启root密码登录</h2><ol>
+<li><p><code>vim /etc/ssh/sshd_config</code></p>
+</li>
+<li><p>找到PermitRootLogin，将键值改成yes，并把该行注释符删掉</p>
+</li>
+<li><p>找到passwordAuthentication，将键值改成yes</p>
+</li>
+<li><p>重启ssh服务 <code>service ssh restart</code></p>
+</li>
+</ol>
+<h2 id="修改端口号"><a href="#修改端口号" class="headerlink" title="修改端口号"></a>修改端口号</h2><p>防止被轻易找到默认端口22，修改端口号</p>
+<ol>
+<li><p>打开配置文件 <code>sudo vim /etc/ssh/sshd_config</code></p>
+<p> 找到<code>#port 22</code>这一行，在这一行下面加一句，即你要修改的端口号，如<code>port 9625</code>，并将上面port 22的注释删掉（防止失败后无法连接，测试成功再加上注释），保存修改</p>
+</li>
+<li><p>重启服务 <code>sudo service ssh restart</code></p>
+</li>
+</ol>
+<h1 id="ssh客户端访问"><a href="#ssh客户端访问" class="headerlink" title="ssh客户端访问"></a>ssh客户端访问</h1><hr>
+<p>ssh命令格式：<code>ssh user@IP -p port</code></p>
+<p>本地测试 <code>ssh nik@localhost -p 9625</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/nmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1910,161 +2065,6 @@ except urllib.error.URLError as e:
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/09/ubuntu18-04装pwndbg/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="忖度">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="c0x19">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/09/ubuntu18-04装pwndbg/" itemprop="url">ubuntu18.04装pwndbg</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-09T16:33:17+08:00">
-                2018-07-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以前用的是peda插件，今天换成pwndgb，功能更多，而且界面更好看</p>
-<p>参考 <a href="https://github.com/pwndbg/pwndbg" target="_blank" rel="noopener">https://github.com/pwndbg/pwndbg</a> </p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><hr>
-<p><strong>按照网站的教程装就好了：</strong></p>
-<ol>
-<li><code>git clone https://github.com/pwndbg/pwndbg</code></li>
-<li><code>cd pwndbg</code></li>
-<li><code>sudo ./setup.sh</code></li>
-</ol>
-<p>第三步对比官网加了sudo，因为发现最后有权限问题</p>
-<p><strong>禁用peda</strong></p>
-<p>参考peda的安装步骤：</p>
-<ol>
-<li><code>git clone https://github.com/longld/peda.git ~/peda</code></li>
-<li><code>echo &quot;source ~/peda/peda.py&quot; &gt;&gt; ~/.gdbinit</code></li>
-</ol>
-<p>第二步在~/.gdbinit中加了开启peda脚本</p>
-<p>可以打开pwndbg的setup.sh，在最后面发现也是在~/.gdbinit中加了开启pwndbg脚本，</p>
-<p>即：<code>echo &quot;source $PWD/gdbinit.py&quot; &gt;&gt; ~/.gdbinit</code></p>
-<p>所以打开~/.gdbinit删除peda那句话就好了</p>
-<p>同理，<strong>peda和pwndbg的切换</strong>就是在~/.gdbinit中切换语句</p>
-<h1 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h1><hr>
-<p><strong>界面</strong></p>
-<p>从上到下为寄存器、代码、栈、函数回溯关系</p>
-<p>界面更加美观</p>
-<ul>
-<li>调用函数时，会显示函数的参数</li>
-<li>条件跳转语句的前面，会显示对号或叉号来表示是否跳转</li>
-<li>栈中会标出esp和ebp</li>
-</ul>
-<p><strong>命令</strong></p>
-<ul>
-<li>stack：查看栈，后面可加数字来规定查看的大小，如<code>stack</code>或<code>stack 20</code></li>
-<li>vmmap：虚拟地址映射，可查看libc等基址</li>
-<li>telescope：查看内存，<code>telescope $rsp 20</code>等价于<code>stack 20</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2115,7 +2115,7 @@ except urllib.error.URLError as e:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
