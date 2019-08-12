@@ -232,6 +232,277 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/ctf杂项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="忖度">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="c0x19">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/12/ctf杂项/" itemprop="url">ctf杂项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-12T09:47:19+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="0x01-杂项简介"><a href="#0x01-杂项简介" class="headerlink" title="0x01 杂项简介"></a>0x01 杂项简介</h1><ul>
+<li><p>定义：杂项（Misc）是ctf比赛中的一个领域，其他ctf领域还有web、pwn、逆向、密码等</p>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>考察基本知识、对安全技能的各个层面都有不同程度的涉及</li>
+<li>趣味，在很大程度上启发思维</li>
+<li>培养兴趣，切入ctf领域的最佳入口</li>
+</ul>
+</li>
+<li>知识点<ul>
+<li>信息收集</li>
+<li>编码转换</li>
+<li>隐写</li>
+<li>取证</li>
+</ul>
+</li>
+</ul>
+<h1 id="0x02-工具"><a href="#0x02-工具" class="headerlink" title="0x02 工具"></a>0x02 工具</h1><ul>
+<li>百度、google</li>
+<li>wireshark</li>
+<li>010 editor</li>
+<li>binwalk</li>
+<li>Stegsolve</li>
+<li>在线编码转换</li>
+</ul>
+<h1 id="0x03-信息收集"><a href="#0x03-信息收集" class="headerlink" title="0x03 信息收集"></a>0x03 信息收集</h1><p>信息收集一般利用网络上的公开渠道来搜索信息，如搜索目标web网页、地理位置、个人资料等</p>
+<ul>
+<li><p>注意，社工库是违法的</p>
+</li>
+<li><p>baidu、google</p>
+</li>
+<li>百度识图、谷歌以图搜图</li>
+<li>目标官方网站</li>
+<li>whois数据库</li>
+</ul>
+<h1 id="0x04-编码转换"><a href="#0x04-编码转换" class="headerlink" title="0x04 编码转换"></a>0x04 编码转换</h1><h2 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h2><p>ASCII码是美国信息交换标准码，是一种标准的单字节字符编码方案，是最基础的计算机识别码，将单字节字符与数字进行一一对应，便于计算机识别</p>
+<p><a href="http://ascii.911cha.com/" target="_blank" rel="noopener">http://ascii.911cha.com/</a></p>
+<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><p>日常用的进制为10进制，计算机一般是16进制和二进制，网上有很多在线进制转换工具</p>
+<p><a href="https://tool.oschina.net/hexconvert" target="_blank" rel="noopener">https://tool.oschina.net/hexconvert</a></p>
+<h2 id="base编码"><a href="#base编码" class="headerlink" title="base编码"></a>base编码</h2><p>base64就是基于64个可打印字符来表示二进制数据的一种方法</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565580785420.png" alt="1565580785420"></p>
+<p>实现：一个字节为8位，我们只需要其中的6位即可（2的6次方为64）</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565580921676.png" alt="1565580921676"></p>
+<p>可见，按顺序依次6位来编码即可，但会出现编码比特位数不能被6整除，因此需要填充，我们用0来填充使得变为6的倍数，并在编号后加上 <code>=</code>号来表示填充了多少0（一个等号代表2个0）</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565581106663.png" alt="1565581106663"></p>
+<p>注：</p>
+<ul>
+<li>base32就是使用32个基本字符</li>
+<li>base编码特点是只会出现基本字符，并且一般末尾都会有<code>=</code>号</li>
+<li>base64结尾最多有2个<code>=</code>号</li>
+<li>base32结尾最多有6个<code>=</code>号</li>
+</ul>
+<h2 id="URL-编码"><a href="#URL-编码" class="headerlink" title="URL 编码"></a>URL 编码</h2><p>也叫做百分号编码，是网页上应用的编码，特点是%</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565581720653.png" alt="1565581720653"></p>
+<p><a href="https://tool.oschina.net/encode?type=4" target="_blank" rel="noopener">https://tool.oschina.net/encode?type=4</a></p>
+<h2 id="Unicode编码"><a href="#Unicode编码" class="headerlink" title="Unicode编码"></a>Unicode编码</h2><p>为了将所有的字符都表示出来，1字节的ascii显示是不够的，因此有了2字节表示一个字符的unicode编码</p>
+<p>有四种格式：</p>
+<ul>
+<li>&amp;#[hex]    <code>&amp;#0054</code></li>
+<li>&amp;#[dec]    <code>&amp;#00084</code></li>
+<li>\u[hex]    <code>\u0054</code></li>
+<li>\u+[hex]    <code>\u+0054</code></li>
+</ul>
+<h2 id="Morse编码"><a href="#Morse编码" class="headerlink" title="Morse编码"></a>Morse编码</h2><p>也就是广为人知的摩斯密码</p>
+<ul>
+<li>只有<code>.</code>和<code>-</code></li>
+<li>一点的长度时一个单位，一划是三个单位</li>
+<li>间隔<ul>
+<li>一个字母中点划之间的间隔是一点（一个单位）</li>
+<li>两个字母之间的间隔是三点（一划）</li>
+<li>两个单词之间的间隔是七点</li>
+</ul>
+</li>
+</ul>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565583881749.png" alt="1565583881749"></p>
+<h2 id="Jother编码"><a href="#Jother编码" class="headerlink" title="Jother编码"></a>Jother编码</h2><p>俗称JSFuck，使用两个字符：<code>[]()!+</code>来编写JavaScript程序</p>
+<p>将密文放入浏览器的控制台中执行就会显示真实字符</p>
+<p><a href="http://tmxk.org/jother/" target="_blank" rel="noopener">http://tmxk.org/jother/</a></p>
+<h1 id="0x05-隐写"><a href="#0x05-隐写" class="headerlink" title="0x05 隐写"></a>0x05 隐写</h1><p>隐写一般分为两种类型，插入和替换</p>
+<ul>
+<li>插入：利用文件格式的无光数据或空白区域放置需要的数据，不会改变原始数据</li>
+<li>替换，如LSB替换，把每个字节最低有效位变换，不会改变文件大小</li>
+</ul>
+<h2 id="图片尾部插入"><a href="#图片尾部插入" class="headerlink" title="图片尾部插入"></a>图片尾部插入</h2><ul>
+<li><p>出题方法：使用16进制编辑器打开图片。在末尾添加特殊字符串，如flag</p>
+</li>
+<li><p>插入一般是JPG图片，JPG图片的结尾都是FF D9</p>
+</li>
+</ul>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565593427058.png" alt="1565593427058"></p>
+<p>使用010 edit打开即可发现在结尾符FF D9之后是flag，有时候拿到的是base编码后的flag，需要再解码一下</p>
+<h2 id="图片中间插入"><a href="#图片中间插入" class="headerlink" title="图片中间插入"></a>图片中间插入</h2><p>JPG图片会有标记码，标记码高字节固定为0xFF，标记码之间有冗余字节，在中间插入隐秘数据即可，不会影响标记码位置，图片可正常打开</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565593981749.png" alt="1565593981749"></p>
+<p>同上，容易找到flag</p>
+<p>这两种一般可以直接用字符串搜索功能来寻找隐秘信息</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565594369107.png" alt="1565594369107"></p>
+<h2 id="插入压缩包"><a href="#插入压缩包" class="headerlink" title="插入压缩包"></a>插入压缩包</h2><p>可以在图片中插入压缩文件，利用windos命令行工具即可实现插入</p>
+<p><code>copy /b old.jpg+flag.zip new.jpg</code></p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565594910322.png" alt="1565594910322"></p>
+<p>最简单的办法就是修改后缀名为.zip，然后解压即可</p>
+<p>但最正确的还是利用binwalk来分析</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565595130324.png" alt="1565595130324"></p>
+<p>明显可以看到图片里包括一个zip文件，里面有flag.txt</p>
+<p>使用foremost来将图片分离输出到flag文件夹中</p>
+<p><code>foremost new.jpg -o flag</code></p>
+<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><p>可以在图片中再插入图片</p>
+<p>同上</p>
+<p><code>copy \b old.jpg+flag.jpg new.jpg</code></p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565595709566.png" alt="1565595709566"></p>
+<p>同上使用binwalk分析即可</p>
+<h2 id="LSB隐写"><a href="#LSB隐写" class="headerlink" title="LSB隐写"></a>LSB隐写</h2><p>LSB是最低有效位的英文缩写</p>
+<p>LSB隐写只适用于png和bmp文件，jpg是有损压缩，压缩过程中或破坏信息</p>
+<p>原理：LSB隐写就是修改图片中像素的三原色最低位，肉眼是看不出区别的</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565596471497.png" alt="1565596471497"></p>
+<p>修改最低位bit，使用工具Stegsolve处理LSB隐写题</p>
+<p><strong>例题1</strong></p>
+<p><img src="C:\TICP\杂项任务\杂项培训资料\隐写\LSB隐写\lsb1.png" alt="lsb1"></p>
+<p>使用Stegsolve工具选中三原色最低位</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565596539295.png" alt="1565596539295"></p>
+<p>拿到了加密信息 9keKZ9LDcKHV@@)-=UD)AN2PSBiAA[0OJ=.DeslN</p>
+<p>是一个base85编码，解码即可</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565597382902.png" alt="1565597382902"></p>
+<p><strong>例题2</strong></p>
+<p><img src="C:\TICP\杂项任务\杂项培训资料\隐写\LSB隐写\lsb2.png" alt="lsb2"></p>
+<p>使用工具打开图片，点击下面的移动按钮，修改到gray bits，即发现了二维码，扫码拿到了flag</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565597743543.png" alt="1565597743543"></p>
+<h2 id="Exif隐写"><a href="#Exif隐写" class="headerlink" title="Exif隐写"></a>Exif隐写</h2><p>jpg图片比其他图片多了exif描述，这种题非常简单，查看 图片属性即可</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565598384904.png" alt="1565598384904"></p>
+<h2 id="PNG"><a href="#PNG" class="headerlink" title="PNG"></a>PNG</h2><p>PNG文件，文件头是由固定的字节来描述的，剩余的部分由三个以上的数据块特定顺序组成，其中有4个关键数据块</p>
+<ul>
+<li><p>文件头：<code>89 50 4E 47 0D 0A 4A 0A</code></p>
+</li>
+<li><p>数据块</p>
+<p>| 符号名 | 名称           | 数量 | 必须/可选 | 位置限制       |<br>| —— | ————– | —- | ——— | ————– |<br>| IHDR   | 文件头数据块   | 1    | 必须      | 第一块         |<br>| PLTE   | 调色板数据块   | 1    | 可选      | IDAT之前       |<br>| IDAT   | 图像数据块     | 多个 | 必须      | 与其他IDAT连续 |<br>| IEND   | 图像结束数据块 | 1    | 必须      | 最后一个数据块 |</p>
+</li>
+</ul>
+<p>其中每个数据块都有统一的数据结构，每个数据块由4部分组成：</p>
+<ul>
+<li>长度：4字节，数据块中数据域的长度</li>
+<li>类型：4字节</li>
+<li>数据：可变长度，具体数据</li>
+<li>CRC：4字节，循环冗余检测，是通过类型和数据部分进行计算得到的</li>
+</ul>
+<h2 id="IHDR块隐写"><a href="#IHDR块隐写" class="headerlink" title="IHDR块隐写"></a>IHDR块隐写</h2><p>PNG图片显示的大小是由IHDR块来控制</p>
+<p>打开图片看到提示flag在本图片下面</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565600638686.png" alt="1565600638686"></p>
+<p>使用010编辑器打开，修改增大图片的长度</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565600343373.png" alt="1565600343373"></p>
+<p>保存后查看图片，发现flag</p>
+<p><img src="C:\Users\c0x19\AppData\Roaming\Typora\typora-user-images\1565600722017.png" alt="1565600722017"></p>
+<h1 id="0x06-取证"><a href="#0x06-取证" class="headerlink" title="0x06 取证"></a>0x06 取证</h1><p>基本上是文件分析，日志文件分析、流量抓包文件分析，其中流量包的取证分析是重点</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/linux环境变量/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -528,125 +799,6 @@
 <li><code>./new.sh</code></li>
 </ul>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/07/tesaaa/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="忖度">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="c0x19">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/07/tesaaa/" itemprop="url">tesaaa</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-07T00:13:42+08:00">
-                2019-08-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
